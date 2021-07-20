@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* .buttons{
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  z-index: 10;
+  position: fixed;
+} */
+
+.btn{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  z-index: 400;
+}
+
+
+.leaflet-control-zoom-in{
+  position: relative;
+  z-index: 1;
+  
+}
