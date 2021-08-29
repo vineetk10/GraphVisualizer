@@ -14,18 +14,12 @@ function App() {
   const [markedCities,setMarkedCities] = useState([]);
   const [latlngs,setLatlngs] = useState([]);
   //const [markedCities ,dispatch] = useReducer(cityReducer,[])
+
   return (
   <LatLngContext.Provider value={{latlngs,setLatlngs}}>
     <MarkedCityContext.Provider value={{markedCities,setMarkedCities}}>
-    
-        
-            <MapComponent/>    
-         
+            <MapComponent/>     
             <Dashboard/>
-         
-         
-       
-      
    </MarkedCityContext.Provider>
   </LatLngContext.Provider>
   

@@ -12,13 +12,14 @@ code {
     monospace;
 }
 
-/* .buttons{
+ .buttons{
   position: absolute;
   left: 10px;
   top: 0px;
   z-index: 10;
   position: fixed;
-} */
+  display: flex;
+}   
 
 .btn{
   position: absolute;

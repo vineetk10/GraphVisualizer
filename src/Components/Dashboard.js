@@ -3,7 +3,8 @@ import MarkedCityContext from '../Context/MarkedCityContext'
 import LatLngContext from '../Context/LatLngContext'
 
 import {
-    Button
+    Button,
+    Alert
 } from 'reactstrap'
 import {Container,Row,Col} from "reactstrap"
 import {Polyline} from 'react-leaflet'
@@ -51,14 +52,12 @@ const Dashboard = ()=>{
 
     const MSTCalculate = ()=> {
         var edges = CalculateEdges();
-        console.log(edges);
         var sets = [];
         // const [latlngs,setLatlngs] = useState([]);
         edges.sort((a,b) => (a.weight > b.weight) ? 1 : ((b.weight > a.weight) ? -1 : 0));
         for(let i=0;i<markedCities.length;i++)
         {
             sets.push(new Sets(i,0));
-            //console.log(sets[i].parent);
         }
         
             var result = [];
@@ -70,7 +69,6 @@ const Dashboard = ()=>{
 
             if(x!=y)
            {
-               console.log("Hi");
                Union(sets,x,y);
                result.push(next_edge);
                let markedCity1 = markedCities[next_edge.src];
@@ -91,21 +89,9 @@ const Dashboard = ()=>{
                         }
                     
                 ]);
-                //setLatlngs(latlngs=>[...latlngs,[markedCity2Lat,markedCity2Lng]])
-               //var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
-
-                // zoom the map to the polyline
-                //map.fitBounds(polyline.getBounds());
-
-               //console.log("Latlngs are "+latlngs[0]);
            }
         }
-        console.log(result.length);
         result.sort((a,b) => (a.src > b.src) ? 1 : ((b.src > a.src) ? -1 : 0));
-         for(let i=0;i<result.length;i++)
-        {
-            console.log(result[i]);
-        }
     }
 
     const CalculateEdges = () =>{
@@ -115,7 +101,6 @@ const Dashboard = ()=>{
              var markedCity1 = markedCities[i];
              var markedCity1Lat = markedCity1.position.lat;
              var markedCity1Lng = markedCity1.position.lng;
-            // console.log(markedCity1Lat);
             for(var j=0;j<markedCities.length;j++)
             {
                 if(i!=j)
@@ -124,7 +109,6 @@ const Dashboard = ()=>{
                     var markedCity2Lat = markedCity2.position.lat;
                     var markedCity2Lng = markedCity2.position.lng;
                     var distanceBetweenTwoCitites = distance(markedCity1Lat,markedCity1Lng,markedCity2Lat,markedCity2Lng);
-                    console.log(distanceBetweenTwoCitites);
                     edges.push(new Edge(i,j,distanceBetweenTwoCitites));
                 }
                 
@@ -187,7 +171,7 @@ const Dashboard = ()=>{
                     result[dest] = result[index]+mat[index][dest];
                 }
             //}
-                console.log("Result is: "+result[dest])
+                alert("Result is: "+result[dest])
                 return result;
         }
     }
@@ -198,7 +182,6 @@ const Dashboard = ()=>{
              var markedCity1 = markedCities[i];
              var markedCity1Lat = markedCity1.position.lat;
              var markedCity1Lng = markedCity1.position.lng;
-            // console.log(markedCity1Lat);
             for(var j=0;j<markedCities.length;j++)
             {
                 if(i!=j)
@@ -207,7 +190,6 @@ const Dashboard = ()=>{
                     var markedCity2Lat = markedCity2.position.lat;
                     var markedCity2Lng = markedCity2.position.lng;
                     var distanceBetweenTwoCitites = distance(markedCity1Lat,markedCity1Lng,markedCity2Lat,markedCity2Lng);
-                    console.log(distanceBetweenTwoCitites);
                     mat[i][j] = distanceBetweenTwoCitites;
                 }   
             }
@@ -234,9 +216,13 @@ const Dashboard = ()=>{
         top: "20px",
         zIndex: "400",
        }}>
+       
+
             <Button color="success" onClick={MSTCalculate}>Implement MST</Button>
-      
-             {/* <Button color="success" onClick={DijkCalculate}>Implement Dijkstra</Button> */}
+            <Alert className="instruction" color="primary">
+            Tap on the cities.
+        </Alert>
+              {/* <Button color="success" onClick={DijkCalculate}>Implement Dijkstra</Button>  */}
         </div>
          
        

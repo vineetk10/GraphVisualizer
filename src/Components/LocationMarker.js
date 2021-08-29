@@ -24,7 +24,6 @@ const LocationMarker = ()=> {
     }
   })
 
-console.log(markedCities)
   return  markedCities === undefined || markedCities.length === 0 ? null : (
       <div>
     {markedCities.map(item=>(
